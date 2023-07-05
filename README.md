@@ -9,7 +9,7 @@ Tools for loading, upload, managing huggingface models and datasets
 
 ## Installation
 
-`pip install huggingface_tool`
+`pip install huggingface-tool`
 
 ## Usage
 
