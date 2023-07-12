@@ -15,11 +15,11 @@
 # limitations under the License.
 
 """"""
-from huggingface_tool.savers.model_saver import ModelSaver
+from huggingface_tool.savers.base_model_saver import BaseModelSaver
 
 import torch
 from diffusers import StableDiffusionPipeline
 
-class DiffusionModelSaver(ModelSaver):
+class DiffusionModelSaver(BaseModelSaver):
     def _load(self, name)->bool:
         return StableDiffusionPipeline.from_pretrained(name, torch_dtype=torch.float16)

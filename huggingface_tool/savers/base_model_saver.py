@@ -15,23 +15,13 @@
 # limitations under the License.
 
 """"""
+from abc import ABC
+from huggingface_tool.savers.base_saver import BaseSaver
 
+class BaseModelSaver(BaseSaver,ABC):
+    def save(self, save_dir: str):
+        if self.loaded_object is None:
+            self.logger.info("No model loaded, cannot save")
+            return
+        self.loaded_object.save_pretrained(save_dir)
 
-__TITLE__ = "huggingface_tool"
-__VERSION__ = "v0.0.3"
-__DESCRIPTION__ = "Toolkit for managing huggingface models and datasets"
-__AUTHOR__ = "OpenRL Contributors"
-__EMAIL__ = "huangshiyu@4paradigm.com"
-__version__ = __VERSION__
-
-import platform
-
-python_version_list = list(map(int, platform.python_version_tuple()))
-assert python_version_list >= [
-    3,
-    8,
-    0,
-], (
-    "OpenRL requires Python 3.8 or newer, but your Python is"
-    f" {platform.python_version()}"
-)

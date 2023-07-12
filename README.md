@@ -9,10 +9,12 @@ Tools for loading, upload, managing huggingface models and datasets
 
 ## Installation
 
-`pip install huggingface_tool`
+`pip install huggingface-tool`
 
 ## Usage
 
+- Download and save transformer models with: `htool save-model <model_class> <model_name> <save_dir>`
+  - For example: `htool save-model AutoModelForCausalLM gpt2 ./gpt2`
 - Download and save tokenizer with: `htool save-tk <tokenizer_name> <save_dir>`
   - For example: `htool save-tk gpt2 ./gpt2 `
 - Download and save dataset with: `htool save-data <dataset_name> <save_dir>`

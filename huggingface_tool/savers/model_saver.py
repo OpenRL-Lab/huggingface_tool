@@ -15,13 +15,27 @@
 # limitations under the License.
 
 """"""
-from abc import ABC
-from huggingface_tool.savers.base_saver import BaseSaver
+import transformers
 
-class ModelSaver(BaseSaver,ABC):
-    def save(self, save_dir: str):
-        if self.loaded_object is None:
-            self.logger.info("No model loaded, cannot save")
-            return
-        self.loaded_object.save_pretrained(save_dir)
+from huggingface_tool.savers.base_model_saver import BaseModelSaver
 
+model_class_dict = {
+    "AutoModelForSeq2SeqLM": transformers.AutoModelForSeq2SeqLM,
+    "AutoModelForCausalLM": transformers.AutoModelForCausalLM,
+    "AutoModelForSequenceClassification": transformers.AutoModelForSequenceClassification,
+    "AutoModelForQuestionAnswering": transformers.AutoModelForQuestionAnswering,
+    "AutoModelForTokenClassification": transformers.AutoModelForTokenClassification,
+    "AutoModelForMultipleChoice": transformers.AutoModelForMultipleChoice,
+    "AutoModelForNextSentencePrediction": transformers.AutoModelForNextSentencePrediction,
+    "AutoModelForPreTraining": transformers.AutoModelForPreTraining,
+    "AutoModelForMaskedLM": transformers.AutoModelForMaskedLM,
+    "AutoModelForTableQuestionAnswering": transformers.AutoModelForTableQuestionAnswering,
+}
+
+class ModelSaver(BaseModelSaver):
+    def __init__(self, model_class:str, name:str):
+        super().__init__(name)
+        self.model_class = model_class
+
+    def _load(self,name):
+        return model_class_dict[self.model_class].from_pretrained(name)
