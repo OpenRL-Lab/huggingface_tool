@@ -21,7 +21,7 @@ from abc import ABC, abstractmethod
 from huggingface_tool.utils.logger import Logger
 
 class BaseSaver(ABC):
-    def __init__(self, name):
+    def __init__(self, name:str):
         self.logger = Logger()
         self.name = name
         self.loaded_object = None

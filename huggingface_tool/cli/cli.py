@@ -24,14 +24,15 @@ from termcolor import colored
 from huggingface_tool import __AUTHOR__, __EMAIL__, __TITLE__, __VERSION__
 from huggingface_tool.utils.util import get_system_info
 
+
 def red(text: str):
     return colored(text, "red")
 
 
 def print_version(
-    ctx: Context,
-    param: Option,
-    value: bool,
+        ctx: Context,
+        param: Option,
+        value: bool,
 ) -> None:
     if not value or ctx.resilient_parsing:
         return
@@ -41,9 +42,9 @@ def print_version(
 
 
 def print_system_info(
-    ctx: Context,
-    param: Option,
-    value: bool,
+        ctx: Context,
+        param: Option,
+        value: bool,
 ) -> None:
     if not value or ctx.resilient_parsing:
         return
@@ -93,6 +94,7 @@ def save_dm(model_name, save_dir):
     else:
         saver.logger.info("Model not found")
 
+
 @cli.command()
 @click.argument("tokenizer_name")
 @click.argument("save_dir")
@@ -104,12 +106,26 @@ def save_tk(tokenizer_name, save_dir):
     else:
         saver.logger.info("Tokenizer not found")
 
+
 @cli.command()
 @click.argument("dataset_name")
 @click.argument("save_dir")
 def save_data(dataset_name, save_dir):
     from huggingface_tool.savers.dataset_saver import DatasetSaver
     saver = DatasetSaver(dataset_name)
+    if saver.load():
+        saver.save(save_dir)
+    else:
+        saver.logger.info("Dataset not found")
+
+
+@cli.command()
+@click.argument("model_class")
+@click.argument("model_name")
+@click.argument("save_dir")
+def save_model(model_class, model_name, save_dir):
+    from huggingface_tool.savers.model_saver import ModelSaver
+    saver = ModelSaver(model_class, model_name)
     if saver.load():
         saver.save(save_dir)
     else:

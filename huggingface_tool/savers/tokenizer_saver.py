@@ -17,8 +17,8 @@
 """"""
 from transformers import AutoTokenizer
 
-from huggingface_tool.savers.model_saver import ModelSaver
+from huggingface_tool.savers.base_model_saver import BaseModelSaver
 
-class TokenizerSaver(ModelSaver):
+class TokenizerSaver(BaseModelSaver):
     def _load(self,name):
         return AutoTokenizer.from_pretrained(name)
