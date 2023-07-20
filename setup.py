@@ -38,6 +38,7 @@ def get_install_requires() -> list:
         "transformers",
         "datasets",
         "evaluate",
+        "huggingface_hub",
     ]
 
 
