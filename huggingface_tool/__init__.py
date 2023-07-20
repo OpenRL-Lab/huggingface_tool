@@ -18,7 +18,7 @@
 
 
 __TITLE__ = "huggingface_tool"
-__VERSION__ = "v0.0.3"
+__VERSION__ = "v0.0.4"
 __DESCRIPTION__ = "Toolkit for managing huggingface models and datasets"
 __AUTHOR__ = "OpenRL Contributors"
 __EMAIL__ = "huangshiyu@4paradigm.com"
