@@ -130,3 +130,14 @@ def save_model(model_class, model_name, save_dir):
         saver.save(save_dir)
     else:
         saver.logger.info("Dataset not found")
+
+@cli.command()
+@click.argument("dataset_dir")
+@click.argument("dataset_name")
+def upload_data(dataset_dir, dataset_name):
+    from huggingface_tool.uploaders.dataset_uploader import DatasetUploader
+    uploader = DatasetUploader(dataset_dir, dataset_name)
+    if uploader.check():
+        uploader.push()
+    else:
+        uploader.logger.info("Dataset not valid")
