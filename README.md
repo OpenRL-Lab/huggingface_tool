@@ -27,6 +27,8 @@ Firstly, you need to login with `huggingface-cli login` (you can create or find 
 
 - Upload dataset with: `htool upload-data <local_dataset_dir> <organization_or_username/dataset_name>`
   - For example: `htool upload-data ./daily_dialog OpenRL/daily_dialog`
+- Upload model with: `htool upload-model <local_model_dir> <organization_or_username/model_name>`
+  - For example: `htool upload-model ./tizero OpenRL/tizero`
 
 
 ## Citing huggingface_tool
