@@ -25,6 +25,10 @@ format:
 	isort ${PYTHON_FILES}
 	black ${PYTHON_FILES} --preview
 
+pypi:
+	rm -rf dist
+	python -m build
+
 pypi-test-upload:
 	twine upload dist/* -r testpypi
 
