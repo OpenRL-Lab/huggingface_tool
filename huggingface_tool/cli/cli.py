@@ -141,3 +141,14 @@ def upload_data(dataset_dir, dataset_name):
         uploader.push()
     else:
         uploader.logger.info("Dataset not valid")
+
+@cli.command()
+@click.argument("model_dir")
+@click.argument("model_name")
+def upload_model(model_dir, model_name):
+    from huggingface_tool.uploaders.model_uploader import ModelUploader
+    uploader = ModelUploader(model_dir, model_name)
+    if uploader.check():
+        uploader.push()
+    else:
+        uploader.logger.info("Dataset not valid")
