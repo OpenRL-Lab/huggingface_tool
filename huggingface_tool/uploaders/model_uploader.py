@@ -22,35 +22,7 @@ from huggingface_tool.uploaders.base_uploader import BaseUploader
 from huggingface_hub import HfApi
 from huggingface_hub import ModelCard
 
-def _huggingface_api_upload_file(api, path_or_fileobj, path_in_repo, repo_id, retry=5) -> bool:
-    for retry_time in range(retry):
-        try:
-            api.upload_file(
-                path_or_fileobj=path_or_fileobj,
-                path_in_repo=path_in_repo,
-                repo_id=repo_id,
-                repo_type="model",
-            )
-            return True
-        except:
-            if retry_time == retry - 1:
-                print(f"Can not upload the {path_or_fileobj} after {retry} times retry, please check your network connection.")
-                return False
-
-def _huggingface_api_upload_dir(api, folder_path, repo_id, retry=5) -> bool:
-    for retry_time in range(retry):
-        try:
-            api.upload_folder(
-                folder_path=folder_path,
-                repo_id=repo_id,
-                repo_type="model",
-                ignore_patterns="README.md",
-            )
-            return True
-        except:
-            if retry_time == retry - 1:
-                print(f"Can not upload the model after {retry} times retry, please check your network connection.")
-                return False
+from huggingface_tool.uploaders.utils import _huggingface_api_upload_dir
 
 class ModelUploader(BaseUploader):
     def __init__(self, file_or_dir: str, remote_name: str) -> None:
