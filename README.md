@@ -1,4 +1,4 @@
-# huggingface_tool
+# HuggingFace Tool
 
 [![PyPI](https://img.shields.io/pypi/v/huggingface-tool)](https://pypi.org/project/huggingface-tool/)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/huggingface-tool)
