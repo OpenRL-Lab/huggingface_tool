@@ -17,8 +17,9 @@
 """"""
 
 
-
-def _huggingface_api_upload_file(api, path_or_fileobj, path_in_repo, repo_id, retry=5) -> bool:
+def _huggingface_api_upload_file(
+    api, path_or_fileobj, path_in_repo, repo_id, retry=5
+) -> bool:
     for retry_time in range(retry):
         try:
             api.upload_file(
@@ -30,8 +31,12 @@ def _huggingface_api_upload_file(api, path_or_fileobj, path_in_repo, repo_id, re
             return True
         except:
             if retry_time == retry - 1:
-                print(f"Can not upload the {path_or_fileobj} after {retry} times retry, please check your network connection.")
+                print(
+                    f"Can not upload the {path_or_fileobj} after {retry} times retry,"
+                    " please check your network connection."
+                )
                 return False
+
 
 def _huggingface_api_upload_dir(api, folder_path, repo_id, retry=5) -> bool:
     for retry_time in range(retry):
@@ -45,5 +50,8 @@ def _huggingface_api_upload_dir(api, folder_path, repo_id, retry=5) -> bool:
             return True
         except:
             if retry_time == retry - 1:
-                print(f"Can not upload the model after {retry} times retry, please check your network connection.")
+                print(
+                    f"Can not upload the model after {retry} times retry, please check"
+                    " your network connection."
+                )
                 return False

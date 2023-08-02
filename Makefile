@@ -1,7 +1,7 @@
 SHELL=/bin/bash
-PROJECT_NAME=openplugin
+PROJECT_NAME=huggingface_tool
 PROJECT_PATH=${PROJECT_NAME}/
-PYTHON_FILES = $(shell find setup.py ${PROJECT_NAME} tests examples -type f -name "*.py")
+PYTHON_FILES = $(shell find setup.py ${PROJECT_NAME} tests -type f -name "*.py")
 
 check_install = python3 -c "import $(1)" || pip3 install $(1) --upgrade
 check_install_extra = python3 -c "import $(1)" || pip3 install $(2) --upgrade

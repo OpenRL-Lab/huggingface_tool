@@ -22,20 +22,27 @@ from huggingface_tool.savers.base_model_saver import BaseModelSaver
 model_class_dict = {
     "AutoModelForSeq2SeqLM": transformers.AutoModelForSeq2SeqLM,
     "AutoModelForCausalLM": transformers.AutoModelForCausalLM,
-    "AutoModelForSequenceClassification": transformers.AutoModelForSequenceClassification,
+    "AutoModelForSequenceClassification": (
+        transformers.AutoModelForSequenceClassification
+    ),
     "AutoModelForQuestionAnswering": transformers.AutoModelForQuestionAnswering,
     "AutoModelForTokenClassification": transformers.AutoModelForTokenClassification,
     "AutoModelForMultipleChoice": transformers.AutoModelForMultipleChoice,
-    "AutoModelForNextSentencePrediction": transformers.AutoModelForNextSentencePrediction,
+    "AutoModelForNextSentencePrediction": (
+        transformers.AutoModelForNextSentencePrediction
+    ),
     "AutoModelForPreTraining": transformers.AutoModelForPreTraining,
     "AutoModelForMaskedLM": transformers.AutoModelForMaskedLM,
-    "AutoModelForTableQuestionAnswering": transformers.AutoModelForTableQuestionAnswering,
+    "AutoModelForTableQuestionAnswering": (
+        transformers.AutoModelForTableQuestionAnswering
+    ),
 }
 
+
 class ModelSaver(BaseModelSaver):
-    def __init__(self, model_class:str, name:str):
+    def __init__(self, model_class: str, name: str):
         super().__init__(name)
         self.model_class = model_class
 
-    def _load(self,name):
+    def _load(self, name):
         return model_class_dict[self.model_class].from_pretrained(name)

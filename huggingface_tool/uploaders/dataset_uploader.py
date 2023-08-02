@@ -17,8 +17,10 @@
 """"""
 
 from pathlib import Path
-from huggingface_tool.uploaders.base_uploader import BaseUploader
+
 from datasets import load_from_disk
+
+from huggingface_tool.uploaders.base_uploader import BaseUploader
 
 
 class DatasetUploader(BaseUploader):
@@ -27,7 +29,9 @@ class DatasetUploader(BaseUploader):
         self.dataset = None
 
     def check(self) -> bool:
-        assert Path(self.file_or_dir).exists(), f"File or directory {self.file_or_dir} does not exist"
+        assert Path(
+            self.file_or_dir
+        ).exists(), f"File or directory {self.file_or_dir} does not exist"
         try:
             self.dataset = load_from_disk(self.file_or_dir)
         except:
@@ -45,4 +49,6 @@ class DatasetUploader(BaseUploader):
         return True
 
     def _success_message(self):
-        print(f"Dataset is uploaded to https://huggingface.co/datasets/{self.remote_name}")
+        print(
+            f"Dataset is uploaded to https://huggingface.co/datasets/{self.remote_name}"
+        )

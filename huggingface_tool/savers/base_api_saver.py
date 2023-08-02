@@ -20,9 +20,7 @@ from abc import ABC
 from huggingface_tool.savers.base_saver import BaseSaver
 
 
-class BaseModelSaver(BaseSaver, ABC):
-    def save(self, save_dir: str):
-        if self.loaded_object is None:
-            self.logger.info("No model loaded, cannot save")
-            return
-        self.loaded_object.save_pretrained(save_dir)
+class BaseAPISaver(BaseSaver, ABC):
+    def __init__(self, name: str, repo_type: str):
+        super().__init__(name)
+        self.repo_type = repo_type

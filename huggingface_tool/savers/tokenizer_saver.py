@@ -19,6 +19,7 @@ from transformers import AutoTokenizer
 
 from huggingface_tool.savers.base_model_saver import BaseModelSaver
 
+
 class TokenizerSaver(BaseModelSaver):
-    def _load(self,name):
+    def _load(self, name):
         return AutoTokenizer.from_pretrained(name)

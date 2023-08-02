@@ -20,13 +20,12 @@ from abc import ABC, abstractmethod
 
 from huggingface_tool.utils.logger import Logger
 
+
 class BaseSaver(ABC):
-    def __init__(self, name:str):
+    def __init__(self, name: str):
         self.logger = Logger()
         self.name = name
         self.loaded_object = None
-
-
 
     def load(self) -> bool:
         try:
@@ -37,9 +36,9 @@ class BaseSaver(ABC):
         return True
 
     @abstractmethod
-    def _load(self,name:str):
+    def _load(self, name: str):
         raise NotImplementedError
 
     @abstractmethod
-    def save(self,save_dir: str):
+    def save(self, save_dir: str):
         raise NotImplementedError

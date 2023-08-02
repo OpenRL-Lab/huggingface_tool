@@ -15,14 +15,24 @@
 # limitations under the License.
 
 """"""
-from abc import ABC
 
-from huggingface_tool.savers.base_saver import BaseSaver
+from pathlib import Path
+
+from huggingface_hub import snapshot_download
+
+from huggingface_tool.savers.base_api_saver import BaseAPISaver
 
 
-class BaseModelSaver(BaseSaver, ABC):
-    def save(self, save_dir: str):
-        if self.loaded_object is None:
-            self.logger.info("No model loaded, cannot save")
-            return
-        self.loaded_object.save_pretrained(save_dir)
+class RepoSaver(BaseAPISaver):
+    def _load(self, name: str):
+        repo_id = name
+        repo_type = self.repo_type if self.repo_type == "dataset" else None
+        return {"repo_id": repo_id, "repo_type": repo_type}
+
+    def save(self, name):
+        local_dir = Path(name)
+        snapshot_download(
+            repo_id=self.loaded_object["repo_id"],
+            repo_type=self.loaded_object["repo_type"],
+            local_dir=local_dir,
+        )

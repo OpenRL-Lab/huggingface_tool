@@ -18,8 +18,8 @@
 
 from abc import ABC, abstractmethod
 
-
 from huggingface_tool.utils.logger import Logger
+
 
 class BaseUploader(ABC):
     def __init__(self, file_or_dir: str, remote_name: str) -> None:
@@ -31,7 +31,7 @@ class BaseUploader(ABC):
     def check(self) -> bool:
         raise NotImplementedError
 
-    def push(self)->bool:
+    def push(self) -> bool:
         success = self._push()
         if success:
             self._success_message()

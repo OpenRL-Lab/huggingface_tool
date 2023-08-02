@@ -32,7 +32,6 @@ class Logger:
         self._init()
 
     def _init(self) -> None:
-
         handlers = [RichHandler()]
 
         for handler in logging.root.handlers[:]:
@@ -43,7 +42,6 @@ class Logger:
             format="%(asctime)s [%(levelname)s] %(message)s",
             handlers=handlers,
         )
-
 
     def info(self, msg: str):
         logging.info(msg)

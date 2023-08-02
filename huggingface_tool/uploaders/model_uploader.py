@@ -16,13 +16,13 @@
 
 """"""
 import os
-
 from pathlib import Path
-from huggingface_tool.uploaders.base_uploader import BaseUploader
-from huggingface_hub import HfApi
-from huggingface_hub import ModelCard
 
+from huggingface_hub import HfApi, ModelCard
+
+from huggingface_tool.uploaders.base_uploader import BaseUploader
 from huggingface_tool.uploaders.utils import _huggingface_api_upload_dir
+
 
 class ModelUploader(BaseUploader):
     def __init__(self, file_or_dir: str, remote_name: str) -> None:
@@ -30,11 +30,13 @@ class ModelUploader(BaseUploader):
         self.model = None
 
     def check(self) -> bool:
-        assert Path(self.file_or_dir).exists(), f"File or directory {self.file_or_dir} does not exist"
+        assert Path(
+            self.file_or_dir
+        ).exists(), f"File or directory {self.file_or_dir} does not exist"
         return True
 
-    def push_modelcard(self)->bool:
-        card = ModelCard.load(os.path.join(self.file_or_dir,"README.md"))
+    def push_modelcard(self) -> bool:
+        card = ModelCard.load(os.path.join(self.file_or_dir, "README.md"))
         try:
             card.validate()
             card.push_to_hub(repo_id=self.remote_name)
