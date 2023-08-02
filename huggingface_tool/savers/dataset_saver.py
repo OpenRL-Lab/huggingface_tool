@@ -19,8 +19,9 @@ import datasets
 
 from huggingface_tool.savers.base_saver import BaseSaver
 
+
 class DatasetSaver(BaseSaver):
-    def _load(self,name:str):
+    def _load(self, name: str):
         return datasets.load_dataset(name)
 
     def save(self, save_dir: str):
@@ -28,4 +29,3 @@ class DatasetSaver(BaseSaver):
             self.logger.info("No dataset loaded, cannot save")
             return
         self.loaded_object.save_to_disk(save_dir)
-

@@ -15,6 +15,12 @@ Tools for loading, upload, managing huggingface models and datasets
 
 Firstly, you need to login with `huggingface-cli login` (you can create or find your token at [settings](https://huggingface.co/settings/tokens)).
 
+- Download and save a repo with: `htool save-repo <repo_id> <save_dir> -r <model/dataset>`. `-r` means the repo is a model or dataset repo. By default, it is a model repo.
+  - For example: `htool save-repo OpenRL/tizero ./tizero`
+  - For example: `htool save-repo OpenRL/DeepFakeFace ./DeepFakeFace -r dataset`
+- Download and save a file with: `htool save-file <repo_id>:<remote_filepath> <save_dir> -r <model/dataset>`. `-r` means the repo is a model or dataset repo. By default, it is a model repo.
+  - For example: `htool save-file OpenRL/tizero:actor.pt ./tizero`
+  - For example: `htool save-file OpenRL/DeepFakeFace:README.md ./DeepFakeFace -r dataset`
 - Download and save transformer models with: `htool save-model <model_class> <model_name> <save_dir>`
   - For example: `htool save-model AutoModelForCausalLM gpt2 ./gpt2`
 - Download and save tokenizer with: `htool save-tk <tokenizer_name> <save_dir>`

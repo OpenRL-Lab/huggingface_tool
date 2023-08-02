@@ -15,7 +15,7 @@
 # limitations under the License.
 
 """"""
-import os
+
 
 import click
 from click.core import Context, Option
@@ -30,9 +30,9 @@ def red(text: str):
 
 
 def print_version(
-        ctx: Context,
-        param: Option,
-        value: bool,
+    ctx: Context,
+    param: Option,
+    value: bool,
 ) -> None:
     if not value or ctx.resilient_parsing:
         return
@@ -42,9 +42,9 @@ def print_version(
 
 
 def print_system_info(
-        ctx: Context,
-        param: Option,
-        value: bool,
+    ctx: Context,
+    param: Option,
+    value: bool,
 ) -> None:
     if not value or ctx.resilient_parsing:
         return
@@ -88,6 +88,7 @@ def cli(ctx):
 @click.argument("save_dir")
 def save_dm(model_name, save_dir):
     from huggingface_tool.savers.diffusion_model_saver import DiffusionModelSaver
+
     saver = DiffusionModelSaver(model_name)
     if saver.load():
         saver.save(save_dir)
@@ -96,10 +97,61 @@ def save_dm(model_name, save_dir):
 
 
 @cli.command()
+@click.argument("file_name")
+@click.argument("save_dir")
+@click.option(
+    "--repo_type",
+    "-r",
+    type=click.Choice(
+        [
+            "model",
+            "dataset",
+        ]
+    ),
+    default="model",
+    help="repo type",
+)
+def save_file(file_name, save_dir, repo_type):
+    from huggingface_tool.savers.file_saver import FileSaver
+
+    saver = FileSaver(file_name, repo_type)
+    if saver.load():
+        saver.save(save_dir)
+    else:
+        saver.logger.info("File not found")
+
+
+@cli.command()
+@click.argument("repo_name")
+@click.argument("save_dir")
+@click.option(
+    "--repo_type",
+    "-r",
+    type=click.Choice(
+        [
+            "model",
+            "dataset",
+        ]
+    ),
+    default="model",
+    help="repo type",
+)
+def save_repo(repo_name, save_dir, repo_type):
+    from huggingface_tool.savers.repo_saver import RepoSaver
+
+    saver = RepoSaver(repo_name, repo_type)
+    if saver.load():
+        saver.save(save_dir)
+    else:
+        saver.logger.info("Repo not found")
+
+
+@cli.command()
 @click.argument("tokenizer_name")
 @click.argument("save_dir")
 def save_tk(tokenizer_name, save_dir):
     from huggingface_tool.savers.tokenizer_saver import TokenizerSaver
+
     saver = TokenizerSaver(tokenizer_name)
     if saver.load():
         saver.save(save_dir)
@@ -112,6 +164,7 @@ def save_tk(tokenizer_name, save_dir):
 @click.argument("save_dir")
 def save_data(dataset_name, save_dir):
     from huggingface_tool.savers.dataset_saver import DatasetSaver
+
     saver = DatasetSaver(dataset_name)
     if saver.load():
         saver.save(save_dir)
@@ -125,28 +178,33 @@ def save_data(dataset_name, save_dir):
 @click.argument("save_dir")
 def save_model(model_class, model_name, save_dir):
     from huggingface_tool.savers.model_saver import ModelSaver
+
     saver = ModelSaver(model_class, model_name)
     if saver.load():
         saver.save(save_dir)
     else:
         saver.logger.info("Dataset not found")
 
+
 @cli.command()
 @click.argument("dataset_dir")
 @click.argument("dataset_name")
 def upload_data(dataset_dir, dataset_name):
     from huggingface_tool.uploaders.dataset_uploader import DatasetUploader
+
     uploader = DatasetUploader(dataset_dir, dataset_name)
     if uploader.check():
         uploader.push()
     else:
         uploader.logger.info("Dataset not valid")
 
+
 @cli.command()
 @click.argument("model_dir")
 @click.argument("model_name")
 def upload_model(model_dir, model_name):
     from huggingface_tool.uploaders.model_uploader import ModelUploader
+
     uploader = ModelUploader(model_dir, model_name)
     if uploader.check():
         uploader.push()
