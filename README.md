@@ -32,6 +32,14 @@ Firstly, you need to login with `huggingface-cli login` (you can create or find 
 
 You can also use htool to upload datasets and models to huggingface.
 
+- Upload a file with: `htool upload-file <local_filepath> <organization_or_username/repo_name>:<remote_filepath> -r <model/dataset>`. `-r` means the repo is a model or dataset repo. By default, it is a model repo.
+  - For example: `htool upload-file README.md OpenRL/tizero:README.md`
+  - For example: `htool upload-file README.md OpenRL/DeepFakeFace:README.md -r dataset`
+- Upload a directory with: `htool upload-dir <local_dirpath> <organization_or_username/repo_name>:<remote_dirpath> -r <model/dataset>`. `-r` means the repo is a model or dataset repo. By default, it is a model repo.
+  - For example: `htool upload-dir ./tizero OpenRL/tizero:./`
+  - For example: `htool upload-dir ./tizero/models OpenRL/tizero:./models`
+  - For example: `htool upload-dir ./DeepFakeFace OpenRL/DeepFakeFace:./ -r dataset`
+  - For example: `htool upload-dir ./DeepFakeFace/images OpenRL/DeepFakeFace:./images -r dataset`
 - Upload dataset with: `htool upload-data <local_dataset_dir> <organization_or_username/dataset_name>`
   - For example: `htool upload-data ./daily_dialog OpenRL/daily_dialog`
 - Upload model with: `htool upload-model <local_model_dir> <organization_or_username/model_name>`
