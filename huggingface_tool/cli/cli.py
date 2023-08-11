@@ -198,6 +198,7 @@ def upload_data(dataset_dir, dataset_name):
     else:
         uploader.logger.info("Dataset not valid")
 
+
 @cli.command()
 @click.argument("file_path")
 @click.argument("remote_file_path")
@@ -213,14 +214,15 @@ def upload_data(dataset_dir, dataset_name):
     default="model",
     help="repo type",
 )
-def upload_file(file_path, remote_file_path,repo_type):
+def upload_file(file_path, remote_file_path, repo_type):
     from huggingface_tool.uploaders.file_uploader import FileUploader
 
-    uploader = FileUploader(file_path, remote_file_path,repo_type)
+    uploader = FileUploader(file_path, remote_file_path, repo_type)
     if uploader.check():
         uploader.push()
     else:
         uploader.logger.info("File not valid")
+
 
 @cli.command()
 @click.argument("dir_path")
@@ -237,14 +239,15 @@ def upload_file(file_path, remote_file_path,repo_type):
     default="model",
     help="repo type",
 )
-def upload_dir(dir_path, remote_dir_path,repo_type):
+def upload_dir(dir_path, remote_dir_path, repo_type):
     from huggingface_tool.uploaders.dir_uploader import DirUploader
 
-    uploader = DirUploader(dir_path, remote_dir_path,repo_type)
+    uploader = DirUploader(dir_path, remote_dir_path, repo_type)
     if uploader.check():
         uploader.push()
     else:
         uploader.logger.info("Directory not valid")
+
 
 @cli.command()
 @click.argument("model_dir")

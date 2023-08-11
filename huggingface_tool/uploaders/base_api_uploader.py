@@ -15,16 +15,16 @@
 # limitations under the License.
 
 """"""
-from typing import Dict
-from abc import ABC, abstractmethod
-
+from abc import ABC
 from pathlib import Path
+from typing import Dict
+
 from huggingface_tool.uploaders.base_uploader import BaseUploader
 
 
 class BaseAPIUploader(BaseUploader, ABC):
     def __init__(self, file_or_dir: str, remote_path: str, repo_type: str):
-        super().__init__(file_or_dir,remote_path)
+        super().__init__(file_or_dir, remote_path)
         self.info = self.get_info(remote_path)
         self.repo_type = repo_type
 
@@ -40,4 +40,3 @@ class BaseAPIUploader(BaseUploader, ABC):
             self.file_or_dir
         ).exists(), f"File or directory {self.file_or_dir} does not exist"
         return True
-
