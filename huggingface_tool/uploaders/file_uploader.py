@@ -17,6 +17,7 @@
 """"""
 
 from huggingface_hub import HfApi
+
 from huggingface_tool.uploaders.base_api_uploader import BaseAPIUploader
 
 
@@ -28,7 +29,8 @@ class FileUploader(BaseAPIUploader):
                 path_or_fileobj=self.file_or_dir,
                 path_in_repo=self.info["file_or_directory"],
                 repo_id=self.info["repo_id"],
-                repo_type=self.repo_type, )
+                repo_type=self.repo_type,
+            )
         except:
             print("Cannot upload to hub")
             return False
@@ -37,6 +39,6 @@ class FileUploader(BaseAPIUploader):
     def _success_message(self):
         middle_type = "/datasets/" if self.repo_type == "dataset" else "/"
         print(
-            f"File is uploaded to https://huggingface.co{middle_type}{self.info['repo_id']}"
+            "File is uploaded to"
+            f" https://huggingface.co{middle_type}{self.info['repo_id']}"
         )
-
