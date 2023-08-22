@@ -16,10 +16,10 @@
 
 import sphinx_rtd_theme
 
-import openplugin
+import huggingface_tool
 
 # Get the version string
-version = openplugin.__version__
+version = huggingface_tool.__version__
 
 # -- Project information -----------------------------------------------------
 
