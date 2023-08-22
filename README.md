@@ -4,7 +4,7 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/huggingface-tool)
 [![Hits-of-Code](https://hitsofcode.com/github/OpenRL-Lab/huggingface_tool?branch=main)](https://hitsofcode.com/github/OpenRL-Lab/huggingface_tool/view?branch=main)
 
-Tools for loading, upload, managing huggingface models and datasets
+Tools for loading, upload, managing huggingface models and datasets.
 
 
 ## Installation
